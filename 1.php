@@ -17,9 +17,12 @@ class a
         ];
     }
 }
+
 ?>
 <script>
-    var foo=function(){
-        //js代码
+    var foo = function () {
+        var one = 1;
+        var two = 2;
+        var three = 3;
     }
 </script>
