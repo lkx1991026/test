@@ -4,13 +4,16 @@
 ---hotfix11.56
 <?php
 
-class a {
-    const APP=1;
-    const PLATEFORM=2;
-    public static function getType(){
+class a
+{
+    const APP = 1;
+    const PLATEFORM = 2;
+
+    public static function getType()
+    {
         return [
-                'app'=>self::APP,
-                'plateform'=>self::PLATEFORM
+            'app' => self::APP,
+            'plateform' => self::PLATEFORM
         ];
     }
 }
