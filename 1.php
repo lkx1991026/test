@@ -17,3 +17,9 @@ class a
         ];
     }
 }
+?>
+<script>
+    var foo=function(){
+        //js代码
+    }
+</script>
