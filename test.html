@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text" name="salary" id="salary"value="" placeholder="请输入全额工资" onchange="check()"><span style="color:red;" id="tips"></span><br/>
+    <input type="text" name="tax" id="tax" placeholder="需缴税" readonly><br/>
+    <input type="text" name="salary-after-tax" id="salary-after-tax" placeholder="税后工资" readonly><br/>
+    <input type="button" id="calculate" value="开始计算" onclick="calculate()">
+</body>
+</html>
+
+<script type="text/javascript">
+    var check=function () {
+        var salary = document.getElementById('salary').value;
+        if (salary != parseInt(salary)) {
+            document.getElementById('tips').innerText='请输入数字类型!';
+            document.getElementById("calculate").style.display="none"
+
+
+        } else if (salary <= 0) {
+            document.getElementById('tips').innerText='请输入大于零的数字!';
+            document.getElementById("calculate").style.display="none";
+        } else {
+            document.getElementById('tips').innerText='';
+            document.getElementById("calculate").style.display="block";
+
+        }
+    }
+    var calculate=function () {
+            var tax;
+            var salary_after_tax;
+            var salary=document.getElementById('salary').value;
+            if(salary>13500){
+                tax=(salary-3500)*0.25;
+            }else if(salary>=9000){
+                tax=(salary-3500)*0.2-555;
+
+            }else if(salary>=5000){
+                tax=(salary-3500)*0.1-105;
+            }else if(salary>=3500){
+                tax=(salary-3500)*0.03;
+            }else{
+                window.confirm('低于3500不用交税')
+                tax=0;
+            }
+            salary_after_tax=salary-tax;
+            document.getElementById('tax').value=tax;
+            document.getElementById('salary-after-tax').value=salary_after_tax
+
+
+    }
+
+</script>

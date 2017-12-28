@@ -1,28 +1,25 @@
-这是在master分支编辑的内容
-这是在hotfix上的编辑内容
-这是在hotfix分支上修复的bug
----hotfix11.56
 <?php
+    $salary=$_POST['salary']??0;
+    if($salary>13500){
+        $tax=($salary-3500)*0.25;
+    }elseif($salary>=9000){
+        $tax=($salary-3500)*0.2-555;
 
-class a
-{
-    const APP = 1;
-    const PLATEFORM = 2;
-
-    public static function getType()
-    {
-        return [
-            'app' => self::APP,
-            'plateform' => self::PLATEFORM
-        ];
+    }elseif($salary>=5000){
+        $tax=($salary-3500)*0.1-105;
+    }elseif($salary>=3500){
+        $tax=($salary-3500)*0.03;
     }
-}
-
+$salary_after_tax=$salary-$tax;
+;
 ?>
-<script>
-    var foo = function () {
-        var one = 1;
-        var two = 2;
-        var three = 3;
-    }
-</script>
+
+
+    <form action="" method="post">
+        <input type="number" name="salary" placeholder="请输入全额工资" value="<?=$salary?>"><br/>
+        <input type="text" id="tax" value="<?=$tax??''?>"><br/>
+        <input type="text" id="salary-after-tax" value="<?=$salary_after_tax??''?>"><br/>
+        <input type="submit" value="提交" onclick="calculate()">
+    </form>
+
+
