@@ -1,25 +1,13 @@
 <?php
-    $salary=$_POST['salary']??0;
-    if($salary>13500){
-        $tax=($salary-3500)*0.25;
-    }elseif($salary>=9000){
-        $tax=($salary-3500)*0.2-555;
-
-    }elseif($salary>=5000){
-        $tax=($salary-3500)*0.1-105;
-    }elseif($salary>=3500){
-        $tax=($salary-3500)*0.03;
-    }
-$salary_after_tax=$salary-$tax;
-;
-?>
-
-
-    <form action="" method="post">
-        <input type="number" name="salary" placeholder="请输入全额工资" value="<?=$salary?>"><br/>
-        <input type="text" id="tax" value="<?=$tax??''?>"><br/>
-        <input type="text" id="salary-after-tax" value="<?=$salary_after_tax??''?>"><br/>
-        <input type="submit" value="提交" onclick="calculate()">
-    </form>
-
-
+    $zip=new ZipArchive();
+    $filename='test.zip';
+    var_dump($zip->open($filename,ZipArchive::OVERWRITE|ZipArchive::CREATE));
+    $zip->addFile('jquery10.js');
+    $zip->close();
+    header ( "Cache-Control: max-age=0" );
+    header ( "Content-Description: File Transfer" );
+    header ( 'Content-disposition: attachment; filename=' .$filename  ); // 文件名
+    header ( "Content-Type: application/zip" ); // zip格式的
+    header ( "Content-Transfer-Encoding: binary" ); // 告诉浏览器，这是二进制文件
+//    header ( 'Content-Length: ' . filesize ( $filename ) ); // 告诉浏览器，文件大小
+    @readfile ( $filename );
