@@ -1,25 +1,40 @@
-<?php
-if(isset($_FILES['image'])){
-    $image=$_FILES['image'];
-    $path='./'.uniqid().'.'.substr($image['type'],strrpos($image['type'],'/')+1);
-    move_uploaded_file($image['tmp_name'],$path);
-    $zip=new ZipArchive();
-    $filename='test.zip';
-    var_dump($zip->open($filename,ZipArchive::OVERWRITE|ZipArchive::CREATE));
-    $zip->addFile($path);
-    $zip->close();
-    header ( "Cache-Control: max-age=0" );
-    header ( "Content-Description: File Transfer" );
-    header ( 'Content-disposition: attachment; filename=' .$filename  ); // 文件名
-    header ( "Content-Type: application/zip" ); // zip格式的
-    header ( "Content-Transfer-Encoding: binary" ); // 告诉浏览器，这是二进制文件
-//    header ( 'Content-Length: ' . filesize ( $filename ) ); // 告诉浏览器，文件大小
-    @readfile ( $filename );
-}
+<input type="text" name="url" placeholder="输入网址">
+<input style='background-color: #00B83F;border:none;margin-left: 5px;' type="button" value="点击我跳转" onclick="redirect()">
+<input type="button" name="clear" value="清除计时器">
+<script src="jquery10.js"></script>
+<script type="text/javascript">
+    var id;
+    var time;
+    $('input[name=url]').on('blur',function () {
+        window.clearInterval(id);
+        time=5;
+         id=setInterval('check()',1000);
+    })
+    $('input[name=clear]').on('click',function(){
 
-    ?>
-<form method="post" action="" enctype="multipart/form-data">
-    <input type="file" name="image"><br/>
+    })
 
-    <input type="submit" value="XXX">
-</form>
+    var check=function () {
+
+        if(time>=0){
+            $('input[type=button]').val('还有'+time+'秒自动跳转');
+        }else{
+            redirect();
+        }
+        time--;
+
+    }
+    var redirect=function(){
+        window.clearInterval(id);
+        var url=$('input[name=url]').val();
+        if(url.length==0){
+            confirm('请输入网址');
+            return false;
+
+        }else if(url.substring(0,4)!='http'){
+            url='http://'+url;
+        }
+        window.open(url);
+
+    }
+</script>
